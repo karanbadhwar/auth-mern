@@ -6,7 +6,7 @@ import connectDB from "./config/db.js";
 //Other Packages
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
-
+import cors from "cors";
 // Initialize app
 const port = process.env.PORT || 5000;
 const app = express();
@@ -23,6 +23,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 //For parsing Cookie data
 app.use(cookieParser());
+app.use(
+  cors({
+    origin: "http://localhost:3000", // Replace with your frontend's origin
+    credentials: true, // Enable credentials (cookies, authorization headers)
+  })
+);
 
 //Routes
 app.use("/api/users", userRoutes);
